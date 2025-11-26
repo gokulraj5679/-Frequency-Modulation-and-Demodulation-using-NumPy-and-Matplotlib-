@@ -94,10 +94,7 @@ plt.show()
 ```
 
 
-__Output:__
 
-
-<img width="1280" height="869" alt="image" src="https://github.com/user-attachments/assets/abbcc47f-c892-4cac-bcb6-3b1541b37505" />
 
 
 
