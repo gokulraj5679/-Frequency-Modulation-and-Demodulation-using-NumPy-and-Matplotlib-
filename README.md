@@ -33,7 +33,74 @@ __Algorithm:__
 6. Plot the Signals: Use Matplotlib to plot the message signal, carrier signal, and modulated signal.
 
 __Programme:__
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+```
+Am = 41.4       # Message amplitude
+Ac = 82.8       # Carrier amplitude
+fm = 470        # Message frequency
+fc = 4700       # Carrier frequency
+kf = 200        # Frequency sensitivity
+
+fs = 200000     # Sampling frequency
+t = np.arange(0, 0.01, 1/fs)
+
+# Message Signal
+message = Am * np.cos(2 * np.pi * fm * t)
+
+# Carrier Signal
+carrier = Ac * np.cos(2 * np.pi * fc * t)
+
+# FM Modulated Signal
+beta = (kf * Am) / fm
+fm_signal = Ac * np.cos(2*np.pi*fc*t + beta * np.sin(2*np.pi*fm*t))
+
+# FM Demodulation (Differentiate + Envelope)
+temp = np.diff(fm_signal)        # differentiate
+demodulated = np.abs(temp)       # envelope
+t2 = t[:-1]                      # match time length
+
+# Plotting
+plt.figure(figsize=(12, 10))
+
+plt.subplot(4,1,1)
+plt.plot(t, message)
+plt.title("Message Signal")
+plt.xlabel("Time")
+plt.ylabel("Amplitude")
+
+plt.subplot(4,1,2)
+plt.plot(t, carrier)
+plt.title("Carrier Signal")
+plt.xlabel("Time")
+plt.ylabel("Amplitude")
+
+plt.subplot(4,1,3)
+plt.plot(t, fm_signal)
+plt.title("FM Modulated Signal")
+plt.xlabel("Time")
+plt.ylabel("Amplitude")
+
+plt.subplot(4,1,4)
+plt.plot(t2, demodulated)
+plt.title("FM Demodulated Signal")
+plt.xlabel("Time")
+plt.ylabel("Amplitude")
+
+plt.tight_layout()
+plt.show()
+```
+
 
 __Output:__
 
+
+<img width="1280" height="869" alt="image" src="https://github.com/user-attachments/assets/abbcc47f-c892-4cac-bcb6-3b1541b37505" />
+
+
+
 __Result:__
+![WhatsApp Image 2025-11-22 at 10 49 05 PM](https://github.com/user-attachments/assets/19f45a44-09d1-46da-8051-66ca973adef8)
+
